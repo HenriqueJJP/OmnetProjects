@@ -1,0 +1,5 @@
+22:25:23 **** Incremental Build of configuration debug for project tictoc ****
+make MODE=debug all 
+
+22:25:24 Build Finished (took 474ms)
+

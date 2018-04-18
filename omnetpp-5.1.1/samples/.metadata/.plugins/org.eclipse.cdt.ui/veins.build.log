@@ -1,0 +1,7 @@
+22:25:24 **** Incremental Build of configuration gcc-debug for project veins ****
+make MODE=debug all 
+make[1]: Entering directory '/home/junior/Veins/veins-veins-4.6/src'
+make[1]: Leaving directory '/home/junior/Veins/veins-veins-4.6/src'
+
+22:25:25 Build Finished (took 537ms)
+

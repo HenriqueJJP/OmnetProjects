@@ -1,0 +1,54 @@
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+//
+
+simple TxcTest //Classe que disponibiliza metodos p utilizar na network
+{
+    parameters:
+        @display("i=block/routing");
+        bool SendMsgOnInit = default (false); // se o módulo deve enviar uma mensagem sobre inicialização
+        int limit = default(2); // outro parametro com valor default (limite do n de troca da msg)
+    gates:
+        input in; //porta de entrada
+        output out; //porta de saida
+        //input in2;
+       // output out2;
+}
+network TictocTest //Modulo composto (rede)
+{
+    @display("bgb=345,293");
+    submodules:
+       // tac: TxcTest;
+        tic: TxcTest { //modulo simples instância de TxcTest
+            parameters:
+                SendMsgOnInit = true;  //Parametro como true. Então é tic que envia a msg
+                @display("i=,cyan1;p=183,90");// do not change the icon (first arg of i=) just colorize it
+        }
+        toc: TxcTest { //modulo simples instância de TxcTest
+            parameters:
+                SendMsgOnInit = false;
+                @display("i=,gold;p=222,175"); //here too
+        }
+    connections:
+       // tac.out --> {  delay = 100ms; } --> tic.in2;
+        //tac.in <-- {  delay = 100ms; } <-- tic.out2;
+        tic.out --> {  delay = 100ms; } --> toc.in; //enviando msg de tic p toc com delay de 100ms
+        tic.in <-- {  delay = 100ms; } <-- toc.out; //tic recebendo msg de toc com delay de 100ms
+}
+
+simple TxcFilho1 extends TxcTest{
+    parameters:
+        @display ( "i =, cyan" );
+        SendMsgOnInit = true ;   // Os módulos Tic devem enviar uma mensagem no init
+}

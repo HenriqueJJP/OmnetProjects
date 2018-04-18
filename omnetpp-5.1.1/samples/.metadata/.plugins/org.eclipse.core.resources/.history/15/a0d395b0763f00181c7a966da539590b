@@ -1,0 +1,4 @@
+[General]
+network = TictocTest
+TictocTest.tic.limit = 2
+
